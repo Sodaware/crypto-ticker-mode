@@ -14,3 +14,8 @@
   (let ((crypto-ticker-mode-driver (lambda () "value")))
     (crypto-ticker-mode-update-status)
     (should (string= "value" crypto-ticker-mode-modeline-text))))
+
+(ert-deftest crypto-ticker-mode/test-returns-correct-difference-symbol ()
+  (should (string= crypto-ticker-mode-symbol-same (crypto-ticker-mode--get-difference-symbol 0 0)))
+  (should (string= crypto-ticker-mode-symbol-increased (crypto-ticker-mode--get-difference-symbol 1 0)))
+  (should (string= crypto-ticker-mode-symbol-decreased (crypto-ticker-mode--get-difference-symbol 0 1))))

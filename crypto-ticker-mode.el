@@ -106,6 +106,13 @@
 
 ;; Internal helpers
 
+(defun crypto-ticker-mode--get-difference-symbol (current previous)
+  "Get the difference symbol to display for CURRENT and PREVIOUS."
+  (cond
+   ((< current previous) crypto-ticker-mode-symbol-decreased)
+   ((> current previous) crypto-ticker-mode-symbol-increased)
+   ((= current previous) crypto-ticker-mode-symbol-same)))
+
 (defun crypto-ticker-mode--valid-driver-p (driver)
   "Check if the DRIVER is valid."
   (not (null driver)))
