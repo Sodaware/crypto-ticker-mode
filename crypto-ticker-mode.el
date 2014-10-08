@@ -96,7 +96,7 @@
   "Update the status mode line."
   (if (crypto-ticker-mode--valid-driver-p crypto-ticker-mode-driver)
       (setq crypto-ticker-mode-modeline-text (funcall crypto-ticker-mode-driver))
-    (error "Invalid driver specificied")))
+    (error "Invalid driver specified")))
 
 (defun crypto-ticker-mode-refresh ()
   "Fetch the result from the backend and update the modeline."
