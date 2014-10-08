@@ -77,7 +77,7 @@
 (defun crypto-ticker-mode-start ()
   "Start the update timer."
   (unless crypto-ticker-mode-timer
-    (add-to-list 'global-mode-string crypto-ticker-mode-modeline-text t)
+    (add-to-list 'global-mode-string 'crypto-ticker-mode-modeline-text t)
     (setq crypto-ticker-mode-timer
           (run-at-time "0 sec"
                        crypto-ticker-mode-api-poll-interval
@@ -94,11 +94,12 @@
 
 (defun crypto-ticker-mode-update-status ()
   "Update the status mode line."
-  (setq crypto-ticker-mode-modeline-text "CRYPTO-TICKER-MODE"))
+  (setq crypto-ticker-mode-modeline-text "CRYPTO-TICKER-MODE")
+  (force-mode-line-update))
 
 (defun crypto-ticker-mode-refresh ()
-  "Fetch the result from the API and update the modeline."
-  )
+  "Fetch the result from the backend and update the modeline."
+  (crypto-ticker-mode-update-status))
 
 ;;;###autoload
 (define-minor-mode crypto-ticker-mode

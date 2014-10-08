@@ -5,4 +5,8 @@ Feature: Crypto Ticker Mode Toggling
 
   Scenario: Enable crypto-ticker-mode
     When I turn on crypto-ticker-mode
-    Then the mode line should contain "---"
+    Then the mode line should contain "crypto-ticker-mode-modeline-text"
+  
+  Scenario: Disable crypto-ticker-mode
+    When I turn off crypto-ticker-mode
+    Then the mode line should not contain "crypto-ticker-mode-modeline-text"
