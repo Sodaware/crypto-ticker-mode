@@ -94,12 +94,22 @@
 
 (defun crypto-ticker-mode-update-status ()
   "Update the status mode line."
-  (setq crypto-ticker-mode-modeline-text "CRYPTO-TICKER-MODE")
-  (force-mode-line-update))
+  (if (crypto-ticker-mode--valid-driver-p crypto-ticker-mode-driver)
+      (setq crypto-ticker-mode-modeline-text (funcall crypto-ticker-mode-driver))
+    (error "Invalid driver specificied")))
 
 (defun crypto-ticker-mode-refresh ()
   "Fetch the result from the backend and update the modeline."
-  (crypto-ticker-mode-update-status))
+  (crypto-ticker-mode-update-status)
+  (force-mode-line-update))
+
+
+;; Internal helpers
+
+(defun crypto-ticker-mode--valid-driver-p (driver)
+  "Check if the DRIVER is valid."
+  (not (null driver)))
+
 
 ;;;###autoload
 (define-minor-mode crypto-ticker-mode
