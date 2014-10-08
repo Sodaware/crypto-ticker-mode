@@ -1,3 +1,6 @@
+(require 'cl)
+(require 'el-mock)
+
 (add-to-list 'load-path (file-name-directory (directory-file-name (file-name-directory load-file-name))))
 (require 'crypto-ticker-mode)
 

@@ -1,0 +1,18 @@
+{
+    "return": {
+        "markets": {
+            "DOGE": {
+                "secondarycode": "USD",
+                "secondaryname": "US Dollar",
+                "primarycode": "DOGE",
+                "primaryname": "Dogecoin",
+                "lasttradetime": "2014-09-30 10:13:21",
+                "volume": "527237.54751297",
+                "lasttradeprice": "0.00038276",
+                "label": "DOGE\/USD",
+                "marketid": "182"
+            }
+        }
+    },
+    "success": 1
+}
