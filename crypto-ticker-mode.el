@@ -74,6 +74,9 @@
 ;; Add to the modeline
 (put 'crypto-ticker-mode-modeline-text 'risky-local-variable t)
 
+
+;; Main code
+
 (defun crypto-ticker-mode-start ()
   "Start the update timer."
   (unless crypto-ticker-mode-timer
@@ -81,7 +84,7 @@
     (setq crypto-ticker-mode-timer
           (run-at-time "0 sec"
                        crypto-ticker-mode-api-poll-interval
-                       #'crypto-ticker-mode-refresh))
+                       #'crypto-ticker-mode--refresh))
     (crypto-ticker-mode-update-status)))
 
 (defun crypto-ticker-mode-stop ()
@@ -94,17 +97,18 @@
 
 (defun crypto-ticker-mode-update-status ()
   "Update the status mode line."
+  (interactive)
   (if (crypto-ticker-mode--valid-driver-p crypto-ticker-mode-driver)
       (setq crypto-ticker-mode-modeline-text (funcall crypto-ticker-mode-driver))
     (error "Invalid driver specified")))
 
-(defun crypto-ticker-mode-refresh ()
+
+;; Internal helpers
+
+(defun crypto-ticker-mode--refresh ()
   "Fetch the result from the backend and update the modeline."
   (crypto-ticker-mode-update-status)
   (force-mode-line-update))
-
-
-;; Internal helpers
 
 (defun crypto-ticker-mode--get-difference-symbol (current previous)
   "Get the difference symbol to display for CURRENT and PREVIOUS."
