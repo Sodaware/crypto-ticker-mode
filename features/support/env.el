@@ -15,9 +15,11 @@
 (require 'espuds)
 (require 'ert)
 
+(require 'crypto-ticker-mode-driver-test)
+
 (Setup
  ;; Before anything has run
- (setq crypto-ticker-mode-driver 'crypto-ticker-mode-driver-cryptsy))
+ (setq crypto-ticker-mode-driver 'crypto-ticker-mode-driver-test))
 
 (Before
  ;; Before each scenario is run
