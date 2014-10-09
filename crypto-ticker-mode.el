@@ -135,8 +135,7 @@
             difference-symbol
             crypto-ticker-mode-current-value
             crypto-ticker-mode-currency-from-symbol
-            crypto-ticker-mode-currency-to-symbol))
-)
+            crypto-ticker-mode-currency-to-symbol)))
 
 (defun crypto-ticker-mode--valid-driver-p (driver)
   "Check if the DRIVER is valid."

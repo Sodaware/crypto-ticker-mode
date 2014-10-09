@@ -11,9 +11,11 @@
     (should (crypto-ticker-mode--valid-driver-p crypto-ticker-mode-driver))))
 
 (ert-deftest crypto-ticker-mode-test/test-can-use-lambda-as-driver ()
-  (let ((crypto-ticker-mode-driver (lambda () "value")))
+  (let ((crypto-ticker-mode-driver (lambda () 0))
+        (crypto-ticker-mode-previous-value 0)
+        (crypto-ticker-mode-current-value 0))
     (crypto-ticker-mode-update-status)
-    (should (string= "value" crypto-ticker-mode-modeline-text))))
+    (should (string= " - 0Ð/$" crypto-ticker-mode-modeline-text))))
 
 (ert-deftest crypto-ticker-mode-test/test-returns-correct-difference-symbol ()
   (should (string= crypto-ticker-mode-symbol-same (crypto-ticker-mode--get-difference-symbol 0 0)))
@@ -21,7 +23,9 @@
   (should (string= crypto-ticker-mode-symbol-decreased (crypto-ticker-mode--get-difference-symbol 0 1))))
 
 (ert-deftest crypto-ticker-mode-test/test-can-format-mode-line ()
-  (should (string= " - 0Ð/$" (crypto-ticker-mode--format-mode-line))))
+  (let ((crypto-ticker-mode-previous-value 0)
+        (crypto-ticker-mode-current-value 0))
+    (should (string= " - 0Ð/$" (crypto-ticker-mode--format-mode-line)))))
 
 (ert-deftest crypto-ticker-mode-test/test-can-format-mode-line-with-custom-values ()
   (let ((crypto-ticker-mode-previous-value 0)
