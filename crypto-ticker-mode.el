@@ -121,6 +121,7 @@
 (defun crypto-ticker-mode--get-difference-symbol (current previous)
   "Get the difference symbol to display for CURRENT and PREVIOUS."
   (cond
+   ((null previous)      " ")
    ((< current previous) crypto-ticker-mode-symbol-decreased)
    ((> current previous) crypto-ticker-mode-symbol-increased)
    ((= current previous) crypto-ticker-mode-symbol-same)))
