@@ -84,7 +84,7 @@
 ;; Main code
 
 (defun crypto-ticker-mode-start ()
-  "Start the update timer."
+  "Start the update timer and add ."
   (unless crypto-ticker-mode-timer
     (setq global-mode-string (append global-mode-string '(crypto-ticker-mode-modeline-text)))
     (setq crypto-ticker-mode-timer
@@ -102,10 +102,13 @@
           (delq 'crypto-ticker-mode-modeline-text global-mode-string))))
 
 (defun crypto-ticker-mode-update-status ()
-  "Update the status mode line."
+  "Fetch the latest value from the driver and update the status mode line."
   (interactive)
   (if (crypto-ticker-mode--valid-driver-p crypto-ticker-mode-driver)
-      (setq crypto-ticker-mode-modeline-text (funcall crypto-ticker-mode-driver))
+      (progn
+        (setq crypto-ticker-mode-previous-value crypto-ticker-mode-current-value)
+        (setq crypto-ticker-mode-current-value (funcall crypto-ticker-mode-driver))
+        (setq crypto-ticker-mode-modeline-text (crypto-ticker-mode--format-mode-line)))
     (error "Invalid driver specified")))
 
 
