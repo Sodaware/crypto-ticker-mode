@@ -86,7 +86,7 @@
 (defun crypto-ticker-mode-start ()
   "Start the update timer and add ."
   (unless crypto-ticker-mode-timer
-    (setq global-mode-string (append global-mode-string '(crypto-ticker-mode-modeline-text)))
+    (setq global-mode-string (append global-mode-string 'crypto-ticker-mode-modeline-text))
     (setq crypto-ticker-mode-timer
           (run-at-time "0 sec"
                        crypto-ticker-mode-api-poll-interval
