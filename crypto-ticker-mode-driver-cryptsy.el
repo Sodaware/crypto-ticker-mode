@@ -36,9 +36,10 @@
 (defun crypto-ticker-mode-driver-cryptsy ()
   "Get the latest exchange rate from cryptsy."
   (let ((response (cryptsy-public-api-get-market-data crypto-ticker-mode-driver-cryptsy-market-id)))
-    (cryptsy-public-api-get-info-value crypto-ticker-mode-driver-cryptsy-market-name
-                                       'lasttradeprice
-                                       response)))
+    (string-to-number  (cryptsy-public-api-get-info-value
+                        crypto-ticker-mode-driver-cryptsy-market-name
+                        'lasttradeprice
+                        response))))
 
 (provide 'crypto-ticker-mode-driver-cryptsy)
 ;;; crypto-ticker-mode-driver-cryptsy ends here

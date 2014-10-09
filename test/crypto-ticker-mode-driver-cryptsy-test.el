@@ -6,4 +6,4 @@
    (mock (cryptsy-public-api-get-market-data 182) => (read-fixture "singlemarketdata-marketid-182.json"))
    (let ((crypto-ticker-mode-driver 'crypto-ticker-mode-driver-cryptsy))
      (crypto-ticker-mode-update-status)
-     (should (string= "0.00038276" crypto-ticker-mode-modeline-text)))))
+     (should (string= " ↑ 0.00038276Ð/$" crypto-ticker-mode-modeline-text)))))
