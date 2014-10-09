@@ -68,8 +68,8 @@
 (defvar crypto-ticker-mode-symbol-same "-"
   "Text to display when new price is the same as the previous one.")
 
-(defvar crypto-ticker-mode-current-value 0)
-(defvar crypto-ticker-mode-previous-value 0)
+(defvar crypto-ticker-mode-current-value nil)
+(defvar crypto-ticker-mode-previous-value nil)
 
 (defvar crypto-ticker-mode-currency-from-symbol "Ð"
   "The symbol for the base currency.")
