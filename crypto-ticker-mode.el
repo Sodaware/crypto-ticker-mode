@@ -90,8 +90,7 @@
     (setq crypto-ticker-mode-timer
           (run-at-time "0 sec"
                        crypto-ticker-mode-api-poll-interval
-                       #'crypto-ticker-mode--refresh))
-    (crypto-ticker-mode-update-status)))
+                       #'crypto-ticker-mode--refresh))))
 
 (defun crypto-ticker-mode-stop ()
   "Stop the update timer and clean up the mode line."
