@@ -39,7 +39,7 @@
 
 ;; Configuration
 
-(defconst crypto-ticker-mode-format " %s %s/%s%s")
+(defconst crypto-ticker-mode-format " %s %s%s/%s")
 
 (defgroup crypto-ticker-mode nil
   "crypto-ticker-mode extension"
@@ -70,6 +70,12 @@
 
 (defvar crypto-ticker-mode-current-value 0)
 (defvar crypto-ticker-mode-previous-value 0)
+
+(defvar crypto-ticker-mode-currency-from-symbol "Ð"
+  "The symbol for the base currency.")
+
+(defvar crypto-ticker-mode-currency-to-symbol "$"
+  "The symbol for the converted currency.")
 
 ;; Add to the modeline
 (put 'crypto-ticker-mode-modeline-text 'risky-local-variable t)
@@ -116,6 +122,18 @@
    ((< current previous) crypto-ticker-mode-symbol-decreased)
    ((> current previous) crypto-ticker-mode-symbol-increased)
    ((= current previous) crypto-ticker-mode-symbol-same)))
+
+(defun crypto-ticker-mode--format-mode-line ()
+  "Formats the mode line based on the current data."
+  (let ((difference-symbol (crypto-ticker-mode--get-difference-symbol
+                            crypto-ticker-mode-current-value
+                            crypto-ticker-mode-previous-value)))
+    (format crypto-ticker-mode-format
+            difference-symbol
+            crypto-ticker-mode-current-value
+            crypto-ticker-mode-currency-from-symbol
+            crypto-ticker-mode-currency-to-symbol))
+)
 
 (defun crypto-ticker-mode--valid-driver-p (driver)
   "Check if the DRIVER is valid."
