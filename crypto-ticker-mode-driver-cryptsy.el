@@ -31,15 +31,19 @@
 
 ;; Configuration
 (defvar crypto-ticker-mode-driver-cryptsy-market-id 182)
-(defvar crypto-ticker-mode-driver-cryptsy-market-name 'DOGE)
 
 (defun crypto-ticker-mode-driver-cryptsy ()
   "Get the latest exchange rate from cryptsy."
-  (let ((response (cryptsy-public-api-get-market-data crypto-ticker-mode-driver-cryptsy-market-id)))
+  (let* ((response (cryptsy-public-api-get-market-data crypto-ticker-mode-driver-cryptsy-market-id))
+         (market-name (crypto-ticker-mode-driver-cryptsy--get-currency-symbol response)))
     (string-to-number  (cryptsy-public-api-get-info-value
-                        crypto-ticker-mode-driver-cryptsy-market-name
+                        market-name
                         'lasttradeprice
                         response))))
+
+(defun crypto-ticker-mode-driver-cryptsy--get-currency-symbol (response)
+  "Get the currency symbol from RESPONSE."
+  (caar  (assoc-default 'markets (assoc-default 'return response))))
 
 (provide 'crypto-ticker-mode-driver-cryptsy)
 ;;; crypto-ticker-mode-driver-cryptsy ends here

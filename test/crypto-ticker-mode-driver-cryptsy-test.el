@@ -8,3 +8,9 @@
          (crypto-ticker-mode-current-value 0))
      (crypto-ticker-mode-update-status)
      (should (string= " ↑ 0.00038276Ð/$" crypto-ticker-mode-modeline-text)))))
+
+(ert-deftest crypto-ticker-mode-driver-cryptsy-test/can-get-market-symbol-from-response ()
+  (with-mock
+   (mock (cryptsy-public-api-get-market-data 182) => (read-fixture "singlemarketdata-marketid-182.json"))
+   (let ((response (cryptsy-public-api-get-market-data 182)))
+     (should (eq 'DOGE (crypto-ticker-mode-driver-cryptsy--get-currency-symbol response))))))
