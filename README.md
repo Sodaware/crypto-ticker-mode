@@ -5,6 +5,46 @@
 **crypto-ticker-mode** is an Emacs minor mode for displaying crypto currency
 exchange rates in the mode line.
 
+![crypto-ticker-mode](/crypto-ticker-mode.png)
+
+
+## Configuration
+
+By default, **crypto-ticker-mode** is configured to fetch the latest
+Dogecoin/USD exchange rate from the [Cryptsy](http://cryptsy.com/) public API.
+
+### Configuring the Display
+
+To change the displayed currency symbols, modify the following variable:
+
+* `crypto-ticker-mode-currency-from-symbol` - This is the starting currency,
+  such as BTC or DOGE.
+* `crypto-ticker-mode-currency-to-symbol` - The currency being converted to,
+  such as $ or £.
+
+**NOTE** - Changing the symbols does not change the actual rate calculation.
+
+
+### Configuring the Cryptsy Driver
+
+To change the displayed exchange rate, the following variable should be
+modified:
+
+* `crypto-ticker-mode-driver-cryptsy-market-id` - This is the Cryptsy market ID
+  to fetch data for. A full list of markets can be found on the Cryptsy
+  homepage.
+
+
+### Example
+
+The following configuration would display the current Bitcoin/USD exchange rate:
+
+```lisp
+(setq crypto-ticker-mode-from-symbol "BTC")
+(setq crypto-ticker-mode-to-symbol "$")
+(setq crypto-ticker-mode-driver-cryptsy-market-id 2)
+```
+
 
 ## Licence
 
