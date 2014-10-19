@@ -33,10 +33,6 @@
 
 ;;; Code:
 
-;; Dependencies
-
-;; (require 'crypto-ticker-mode-driver-cryptsy)
-
 ;; Configuration
 
 (defconst crypto-ticker-mode-format " %s %s%s/%s")

@@ -3,8 +3,6 @@
 
 (package-file "crypto-ticker-mode.el")
 
-(depends-on "cryptsy-public-api")
-
 (development
  (depends-on "ecukes")
  (depends-on "espuds")
