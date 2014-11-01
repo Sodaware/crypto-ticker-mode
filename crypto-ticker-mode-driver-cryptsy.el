@@ -30,7 +30,14 @@
 (require 'cryptsy-public-api)
 
 ;; Configuration
-(defvar crypto-ticker-mode-driver-cryptsy-market-id 182)
+
+(defcustom crypto-ticker-mode-driver-cryptsy-market-id 182
+  "Cryptsy market ID to poll."
+  :type 'number
+  :group 'crypto-ticker-mode)
+
+
+;; Main driver function
 
 (defun crypto-ticker-mode-driver-cryptsy ()
   "Get the latest exchange rate from cryptsy."
@@ -41,9 +48,11 @@
                         'lasttradeprice
                         response))))
 
+;; Internal Helpers
+
 (defun crypto-ticker-mode-driver-cryptsy--get-currency-symbol (response)
   "Get the currency symbol from RESPONSE."
-  (caar  (assoc-default 'markets (assoc-default 'return response))))
+  (caar (assoc-default 'markets (assoc-default 'return response))))
 
 (provide 'crypto-ticker-mode-driver-cryptsy)
 ;;; crypto-ticker-mode-driver-cryptsy ends here
