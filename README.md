@@ -25,6 +25,23 @@ To change the displayed currency symbols, modify the following variable:
 **NOTE** - Changing the symbols does not change the actual rate calculation.
 
 
+### Other Configuration Options
+
+**crypto-ticker-mode** also provides the following configuration options:
+
+* `crypto-ticker-mode-api-poll-interval` - The number of seconds the ticker will
+  wait between rate checks. By default this is 10 minutes.
+
+* `crypto-ticker-mode-symbol-increased` - The symbol that displays in the
+  modeline when the exchange rate has increased. This is an up-arrow by default.
+
+* `crypto-ticker-mode-symbol-decreased` - The symbol displayed in the modeline
+  when the exchange rate has decreased. This is a down-arrow by default.
+
+* `crypto-ticker-mode-symbol-same` - Displayed when the price hasn't
+  changed. This is a dash by default.
+
+
 ### Configuring the Cryptsy Driver
 
 To change the displayed exchange rate, the following variable should be
@@ -35,11 +52,17 @@ modified:
   homepage.
 
 
-### Example
+### Changing Drivers
+
+To change the driver, set the `crypto-ticker-mode-driver` variable to be a valid
+function that returns the current exchange rate. 
+
+
+### Configuration Example
 
 The following configuration would display the current Bitcoin/USD exchange rate:
 
-```lisp
+```el
 (setq crypto-ticker-mode-from-symbol "BTC")
 (setq crypto-ticker-mode-to-symbol "$")
 (setq crypto-ticker-mode-driver-cryptsy-market-id 2)
