@@ -84,7 +84,7 @@ The following configuration would display the current Bitcoin/USD exchange rate:
 
 ## Licence
 
-Copyright (C) 2014 Phil Newton
+Copyright (C) 2014-2019 Phil Newton
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
