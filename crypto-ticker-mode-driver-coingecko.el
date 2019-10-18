@@ -50,23 +50,27 @@
 (defun crypto-ticker-mode-driver-coingecko ()
   "Get the latest exchange rate from CoinGecko."
   ;; Get the latest value from CoinGecko.
-  (string-to-number (crypto-ticker-mode-driver-coingecko--fetch-exchange-rate
-                     crypto-ticker-mode-driver-coingecko-from-currency
-                     crypto-ticker-mode-driver-coingecko-to-currency)))
+  (crypto-ticker-mode-driver-coingecko--fetch-exchange-rate
+   crypto-ticker-mode-driver-coingecko-from-currency
+   crypto-ticker-mode-driver-coingecko-to-currency))
 
 ;; Internal Helpers
 
 (defun crypto-ticker-mode-driver-coingecko--fetch-exchange-rate (from-coin to-coin)
   "Get the exchange rate between FROM-COIN and TO-COIN."
+  (let ((response (crypto-ticker-mode-driver-coingecko--fetch-simple-price from-coin to-coin)))
+    (assoc-default (intern to-coin) (assoc-default (intern from-coin) response))))
+
+(defun crypto-ticker-mode-driver-coingecko--fetch-simple-price (from-coin to-coin)
+  "Fetch the rate for FROM-COIN to TO-COIN using the simple api."
   (let* ((url (format "https://api.coingecko.com/api/v3/simple/price?ids=%s&amp;vs_currencies=%s"
                       from-coin
-                      to-coin))
-         (response (with-current-buffer (url-retrieve-synchronously url)
-                     (goto-char (point-min))
-                     (goto-char url-http-end-of-headers)
-                     (prog1 (json-read)
-                       (kill-buffer)))))
-    (assoc-default (intern to-coin) (assoc-default (intern from-coin) response))))
+                      to-coin)))
+    (with-current-buffer (url-retrieve-synchronously url)
+      (goto-char (point-min))
+      (goto-char url-http-end-of-headers)
+      (prog1 (json-read)
+        (kill-buffer)))))
 
 (provide 'crypto-ticker-mode-driver-coingecko)
 ;;; crypto-ticker-mode-driver-coingecko ends here
