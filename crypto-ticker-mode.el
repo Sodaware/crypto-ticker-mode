@@ -2,11 +2,10 @@
 
 ;; Based on btc-ticker by Jorge Niedbalski R.
 
-;; Copyright (C) 2014 Phil Newton
+;; Copyright (C) 2014-2019 Phil Newton
 
 ;; Author: Phil Newton <phil@sodaware.net>
-;; Version: 0.1
-;; Package-Requires: ((cryptsy-public-api "0.1"))
+;; Version: 0.1.1
 ;; Keywords: dogecoin bitcoin litecoin
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -28,8 +27,8 @@
 ;; displays them in the mode line.  It can be configured to show different
 ;; currencies, and supports a variety of backends.
 
-;; At the moment it just uses Cryptsy, but over time I'll be adding more
-;; backends.
+;; At the moment it uses CoinGecko to fetch prices.  In the future I may add
+;; more backends.
 
 ;;; Code:
 
@@ -47,7 +46,7 @@
   :type 'number
   :group 'crypto-ticker-mode)
 
-(defvar crypto-ticker-mode-driver 'crypto-ticker-mode-driver-cryptsy)
+(defvar crypto-ticker-mode-driver 'crypto-ticker-mode-driver-coingecko)
 
 (defvar crypto-ticker-mode-timer nil
   "API polling timer.")

@@ -11,7 +11,8 @@ exchange rates in the mode line.
 ## Configuration
 
 By default, **crypto-ticker-mode** is configured to fetch the latest
-Dogecoin/USD exchange rate from the [Cryptsy](http://cryptsy.com/) public API.
+Dogecoin/USD exchange rate from the [CoinGecko](https://coingecko.com/) public API.
+
 
 ### Configuring the Display
 
@@ -42,14 +43,15 @@ To change the displayed currency symbols, modify the following variable:
   changed. This is a dash by default.
 
 
-### Configuring the Cryptsy Driver
+### Configuring the CoinGecko Driver
 
-To change the displayed exchange rate, the following variable should be
+To change the displayed exchange rate, the following variables should be
 modified:
 
-* `crypto-ticker-mode-driver-cryptsy-market-id` - This is the Cryptsy market ID
-  to fetch data for. A full list of markets can be found on the Cryptsy
-  homepage.
+* `crypto-ticker-mode-driver-coingecko-from-currency` - The coin to convert
+  from. This will be something like "dogecoin" or "bitcoin". Defaults to "dogecoin".
+* `crypto-ticker-mode-driver-coingecko-to-currency` - The currency to convert to
+  to. Defaults to "usd".
 
 
 ### Changing Drivers
@@ -58,14 +60,25 @@ To change the driver, set the `crypto-ticker-mode-driver` variable to be a valid
 function that returns the current exchange rate. 
 
 
-### Configuration Example
+### Usage Example
 
 The following configuration would display the current Bitcoin/USD exchange rate:
 
 ```el
+;; Require the extension and driver.
+(require 'crypto-ticker-mode)
+(require 'crypto-ticker-mode-driver-coingecko)
+
+;; Configure the display.
 (setq crypto-ticker-mode-from-symbol "BTC")
-(setq crypto-ticker-mode-to-symbol "$")
-(setq crypto-ticker-mode-driver-cryptsy-market-id 2)
+(setq crypto-ticker-mode-to-symbol   "$")
+
+;; Configure the driver.
+(setq crypto-ticker-mode-driver-coingecko-from-currency "bitcoin")
+(setq crypto-ticker-mode-driver-coingecko-to-currency   "usd")
+
+;; Enable the mode.
+(crypto-ticker-mode)
 ```
 
 
